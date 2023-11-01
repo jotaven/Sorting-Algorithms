@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 public class Principal {
@@ -18,15 +17,12 @@ public class Principal {
                     insert();
                     break;
                 case 2:
-                    // remove();
-                    break;
-                case 3:
                     shuffle();
                     break;
-                case 4:
+                case 3:
                     sort();
                     break;
-                case 5:
+                case 4:
                     System.exit(0);
                     break;
                 default:
@@ -62,10 +58,9 @@ public class Principal {
         }
 
         System.out.println("1 - Inserir");
-        System.out.println("2 - Remover");
-        System.out.println("3 - Embaralhar");
-        System.out.println("4 - Ordenar");
-        System.out.println("5 - Sair");
+        System.out.println("2 - Embaralhar");
+        System.out.println("3 - Ordenar");
+        System.out.println("4 - Sair");
     }
 
     // print menu de ordenação
@@ -132,11 +127,6 @@ public class Principal {
         }
     }
 
-    public static void remove() {
-        System.out.print("Insira um número: ");
-        int n = sc.nextInt();
-        array.remove(n);
-    }
 
     public static void shuffle() {
         for (int i = 0; i < array.size(); i++) {
@@ -144,6 +134,7 @@ public class Principal {
             int temp = array.get(i);
             array.set(i, array.get(randomPosition));
             array.set(randomPosition, temp);
+            isSorted = false;
         }
     }
 }
