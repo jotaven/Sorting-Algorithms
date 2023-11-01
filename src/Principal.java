@@ -12,6 +12,7 @@ public class Principal {
             printMenuPrincipal();
             System.out.print("\nDigite uma opção: ");
             int op = sc.nextInt();
+            sc.nextLine();
             switch (op) {
                 case 1:
                     insert();
@@ -82,9 +83,13 @@ public class Principal {
             printSortMenu();
             System.out.print("\nDigite uma opção: ");
             int op = sc.nextInt();
+            sc.nextLine();
             switch (op) {
                 case 1:
                     BubbleSort.illustrativeSort(array);
+                    System.out.println("Precione enter para continuar...");
+                    sc.nextLine();
+                    clear();
                     isSorted = true;
                     return;
                 case 2:
@@ -115,6 +120,7 @@ public class Principal {
     private static void insert() {
         System.out.print("Insira um número: ");
         int n = sc.nextInt();
+        sc.nextLine();
 
         if (array.contains(n)) {
             System.out.println("Número já existe no array!");
@@ -158,5 +164,10 @@ public class Principal {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

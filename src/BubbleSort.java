@@ -64,11 +64,6 @@ public class BubbleSort {
                 sleep(400);
             }
         }
-        System.out.println("Precione enter para continuar...");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        scanner.close();
-        clear();
     }
 
     private static void clear() {
