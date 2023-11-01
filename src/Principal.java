@@ -89,8 +89,8 @@ public class Principal {
                     InsertionSort.sort(array);
                     return;
                 case 4:
-                    //MergeSort.sort(array);
-                    break;
+                    MergeSort.sort(array);
+                    return;
                 case 5:
                     //QuickSort.sort(array);
                     break;
