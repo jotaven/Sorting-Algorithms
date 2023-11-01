@@ -32,40 +32,32 @@ public class Principal {
         } while (true);
     }
 
-    // print menu
-    public static void printMenuPrincipal() {
-        System.out.println("  --- MENU ---");
+    private static void printMenuPrincipal() {
+        System.out.println("======== MENU ========");
         if (array.isEmpty()) {
-            System.out.println("Array vazio!");
+            System.out.println("     Array vazio!");
         } else {
             if (isSorted) {
-                System.out.println("Array ordenado: ");
-                for (Integer integer : array) {
-                    System.out.print("[" + integer + "]");
-                }
+                System.out.println(" /Array ordenado: ");
+                printList(array, null);
                 System.out.println();
-                System.out.println("Array Decrescente: ");
-                for (int i = array.size() - 1; i >= 0; i--) {
-                    System.out.print("[" + array.get(i) + "]");
-                }
+                System.out.println(" /Array Decrescente: ");
+                printList(array, true);
             } else {
-                System.out.println("Array: ");
-                for (Integer integer : array) {
-                    System.out.print("[" + integer + "]");
-                }
+                System.out.println(" /Array: ");
+                printList(array, null);
             }
-            System.out.println("\n");
+            System.out.println();
         }
-
+        System.out.println("======================\n");
         System.out.println("1 - Inserir");
         System.out.println("2 - Embaralhar");
         System.out.println("3 - Ordenar");
         System.out.println("4 - Sair");
     }
 
-    // print menu de ordenação
-    public static void printSortMenu() {
-        System.out.println("  --- MENU DE ORDENAÇÃO ---\n");
+    private static void printSortMenu() {
+        System.out.println("===== MENU DE ORDENAÇÃO =====\n");
         System.out.println("1 - Bubble Sort");
         System.out.println("2 - Selection Sort");
         System.out.println("3 - Insertion Sort");
@@ -74,20 +66,25 @@ public class Principal {
         System.out.println("6 - Voltar");
     }
 
-    public static void clearScreen() {
+    private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public static void sort() {
+    private static void sort() {
         do {
+            if (array.isEmpty()) {
+                System.out.println("Array vazio!");
+                sleep(1000);
+                return;
+            }
             clearScreen();
             printSortMenu();
             System.out.print("\nDigite uma opção: ");
             int op = sc.nextInt();
             switch (op) {
                 case 1:
-                    BubbleSort.sort(array);
+                    BubbleSort.illustrativeSort(array);
                     isSorted = true;
                     return;
                 case 2:
@@ -115,7 +112,7 @@ public class Principal {
         } while (true);
     }
 
-    public static void insert() {
+    private static void insert() {
         System.out.print("Insira um número: ");
         int n = sc.nextInt();
 
@@ -127,7 +124,6 @@ public class Principal {
         }
     }
 
-
     public static void shuffle() {
         for (int i = 0; i < array.size(); i++) {
             int randomPosition = (int) (Math.random() * array.size());
@@ -135,6 +131,32 @@ public class Principal {
             array.set(i, array.get(randomPosition));
             array.set(randomPosition, temp);
             isSorted = false;
+        }
+    }
+
+    private static void printList(ArrayList<Integer> array, Boolean descending) {
+        descending = descending == null ? false : descending;
+        if (descending) {
+            System.out.print("[");
+            for (int i = array.size() - 1; i > 0; i--) {
+                System.out.print(array.get(i) + ", ");
+            }
+            System.out.print(array.get(0) + "]");
+            return;
+        }
+        int i;
+        System.out.print("[");
+        for (i = 0; i < array.size() - 1; i++) {
+            System.out.print(array.get(i) + ", ");
+        }
+        System.out.print(array.get(i) + "]");
+    }
+
+    private static void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
