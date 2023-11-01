@@ -92,8 +92,8 @@ public class Principal {
                     MergeSort.sort(array);
                     return;
                 case 5:
-                    //QuickSort.sort(array);
-                    break;
+                    QuickSort.sort(array);
+                    return;
                 case 6:
                     return;
                 default:
