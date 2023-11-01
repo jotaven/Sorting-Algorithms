@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BubbleSort {
     public static void sort(ArrayList<Integer> array) {
