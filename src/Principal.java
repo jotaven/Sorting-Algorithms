@@ -2,10 +2,11 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 
-
 public class Principal {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Integer> array = new ArrayList<Integer>();
+    static Boolean isSorted = false;
+
     public static void main(String[] args) {
         do {
             clearScreen();
@@ -17,7 +18,7 @@ public class Principal {
                     insert();
                     break;
                 case 2:
-                    //remove();
+                    // remove();
                     break;
                 case 3:
                     shuffle();
@@ -35,18 +36,29 @@ public class Principal {
         } while (true);
     }
 
-
     // print menu
     public static void printMenuPrincipal() {
         System.out.println("  --- MENU ---");
         if (array.isEmpty()) {
             System.out.println("Array vazio!");
         } else {
-            System.out.println("Array: ");
-            for (Integer integer : array) {
-                System.out.print("[" + integer + "]");
+            if (isSorted) {
+                System.out.println("Array ordenado: ");
+                for (Integer integer : array) {
+                    System.out.print("[" + integer + "]");
+                }
+                System.out.println();
+                System.out.println("Array Decrescente: ");
+                for (int i = array.size() - 1; i >= 0; i--) {
+                    System.out.print("[" + array.get(i) + "]");
+                }
+            } else {
+                System.out.println("Array: ");
+                for (Integer integer : array) {
+                    System.out.print("[" + integer + "]");
+                }
             }
-            System.out.println();
+            System.out.println("\n");
         }
 
         System.out.println("1 - Inserir");
@@ -81,18 +93,23 @@ public class Principal {
             switch (op) {
                 case 1:
                     BubbleSort.sort(array);
+                    isSorted = true;
                     return;
                 case 2:
                     SelectionSort.sort(array);
+                    isSorted = true;
                     return;
                 case 3:
                     InsertionSort.sort(array);
+                    isSorted = true;
                     return;
                 case 4:
                     MergeSort.sort(array);
+                    isSorted = true;
                     return;
                 case 5:
                     QuickSort.sort(array);
+                    isSorted = true;
                     return;
                 case 6:
                     return;
@@ -103,7 +120,6 @@ public class Principal {
         } while (true);
     }
 
-
     public static void insert() {
         System.out.print("Insira um número: ");
         int n = sc.nextInt();
@@ -112,6 +128,7 @@ public class Principal {
             System.out.println("Número já existe no array!");
         } else {
             array.add(n);
+            isSorted = false;
         }
     }
 
@@ -122,7 +139,7 @@ public class Principal {
     }
 
     public static void shuffle() {
-        for (int i=0; i<array.size(); i++) {
+        for (int i = 0; i < array.size(); i++) {
             int randomPosition = (int) (Math.random() * array.size());
             int temp = array.get(i);
             array.set(i, array.get(randomPosition));
@@ -130,4 +147,3 @@ public class Principal {
         }
     }
 }
-
