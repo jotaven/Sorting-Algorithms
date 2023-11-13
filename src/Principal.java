@@ -24,6 +24,12 @@ public class Principal {
                     sort();
                     break;
                 case 4:
+                    search();
+                    break;
+                case 5:
+                    createNewList();
+                    break;
+                case 0:
                     System.exit(0);
                     break;
                 default:
@@ -54,7 +60,9 @@ public class Principal {
         System.out.println("1 - Inserir");
         System.out.println("2 - Embaralhar");
         System.out.println("3 - Ordenar");
-        System.out.println("4 - Sair");
+        System.out.println("4 - Buscar");
+        System.out.println("5 - Utilizar lista predefinida");
+        System.out.println("0 - Sair");
     }
 
     private static void printSortMenu() {
@@ -65,6 +73,13 @@ public class Principal {
         System.out.println("4 - Merge Sort");
         System.out.println("5 - Quick Sort");
         System.out.println("6 - Voltar");
+    }
+
+    private static void printSearchMenu() {
+        System.out.println("===== MENU DE BUSCA =====\n");
+        System.out.println("1 - Busca Binária");
+        System.out.println("2 - Busca Sequencial");
+        System.out.println("3 - Voltar");
     }
 
     private static void clearScreen() {
@@ -124,9 +139,13 @@ public class Principal {
 
         if (array.contains(n)) {
             System.out.println("Número já existe no array!");
+            System.out.println("Precione enter para continuar...");
+            sc.nextLine();
         } else {
+            if (array.size() > 0 && array.get(array.size() - 1) > n) {
+                isSorted = false;
+            }
             array.add(n);
-            isSorted = false;
         }
     }
 
@@ -137,6 +156,72 @@ public class Principal {
             array.set(i, array.get(randomPosition));
             array.set(randomPosition, temp);
             isSorted = false;
+        }
+    }
+
+    public static void search() {
+        if (array.isEmpty()) {
+            System.out.println("Array vazio!");
+            sleep(1000);
+            return;
+        }
+
+        do {
+
+            clearScreen();
+            printSearchMenu();
+            System.out.print("\nDigite uma opção: ");
+            int op = sc.nextInt();
+            sc.nextLine();
+            switch (op) {
+                case 1:
+                    if (!isSorted) {
+                        System.out.println("Array não está ordenado!");
+                        System.out.println("Precione enter para continuar...");
+                        sc.nextLine();
+                        return;
+                    }
+                    System.out.print("Insira um número: ");
+                    int n = sc.nextInt();
+                    sc.nextLine();
+                    int index = binarySearch(n);
+                    
+                    System.out.println("Precione enter para continuar...");
+                    sc.nextLine();
+                    return;
+                case 2:
+                    System.out.print("Insira um número: ");
+                    n = sc.nextInt();
+                    sc.nextLine();
+                    index = sequencialSearch(n);
+
+                    System.out.println("Precione enter para continuar...");
+                    sc.nextLine();
+                    return;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        } while (true);
+    }
+    
+
+    private static void createNewList() {
+        System.out.print("Insira o tamanho da lista: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        array.clear();
+        isSorted = false;
+
+        for (int i = 0; i < n; i++) {
+            int randomValue = (int) (Math.random() * n) + 1;
+            if (array.contains(randomValue)) {
+                i--;
+                continue;
+            }
+            array.add(randomValue);
         }
     }
 
@@ -156,6 +241,14 @@ public class Principal {
             System.out.print(array.get(i) + ", ");
         }
         System.out.print(array.get(i) + "]");
+    }
+
+    private static int sequencialSearch(int key) {
+        return SequentialSearch.illustrativeSearch(array, key);
+    }
+
+    private static int binarySearch(int key) {
+        return BinarySearch.search(array, key);
     }
 
     private static void sleep(int ms) {

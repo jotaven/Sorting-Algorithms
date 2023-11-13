@@ -24,7 +24,7 @@ public class BubbleSort {
             for (int j = 1; j < (n - i); j++) {
                 clear();
                 System.out.println("===== Bubble Sort =====");
-                System.out.println("Iteração " + (i + 1) + ":");
+                System.out.println("Passo " + (i + 1) + ":");
                 if ((int) array.get(j - 1) > (int) array.get(j)) {
                     temp = (int) array.get(j - 1);
                     array.set(j - 1, array.get(j));
@@ -59,8 +59,8 @@ public class BubbleSort {
                         System.out.println(array.get(k) + "]");
                     }
                 }
-                System.out.println("Tentativas: " + ++tries);
-                sleep(400);
+                System.out.println("Iteração: " + ++tries);
+                sleep(100);
             }
         }
     }
